@@ -33,4 +33,33 @@ los elementos que necesitemos.
 Esto se consigue en el archivo de tailwind.config.js:
 - Creando al igual que el tipo de texto, la configuracion 'colors'
 
+## Inicio de sesión y registro de usuarios
+En la ruta */resources/views/auth* se debe acceder al archivo de login para adquirir el formulario 
+para realizar el inicio de sesión.
+Este formulario puede ser editado para tener visualmente el formulario a gusto del usuario.
+
+**IMPLEMENTACIÓN EN EL CÓDIGO**
+Para realizar esto, en el enlace del boton ubicado en el footer se añade la ruta
+de este archivo de la siguiente forma: href="{{route("login")}}".
+
+Hay que tener en cuenta también que al realizar el inicio de sesión nos rediriga a la
+página inicial del administrador, por lo que esto se conseguirá desde el controlador de la 
+autenticación de usuario ubicado en *app/http/Controllers/auth/AuthenticatedSessionController.php*
+
+En este caso se crea un solo usuario administrador con *php artisan tinker* y ejecutando lo siguiente:
+use App\Models\User;
+User::create([]);
+Con los campos:
+- nombre
+- email
+- bcrypt(contraseña)
+Esto es creado por terminal ya que si se crea en la base de datos salta error ya que no está encriptada la
+contrseña con bycript.
+
+
+    
+
+
+
+
 AÑADIR JSON EN TABLA PROYECTOS PARA VER TODAS LAS FOTOS DE TODOS LOS PRODUCTOS
