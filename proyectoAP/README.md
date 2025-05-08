@@ -5,7 +5,8 @@
    y poder levantar el proyecto
 3. Cambiar la configuración del *.env* para que los datos de la base de datos en el
    propio equipo se relaccionen con los datos del docker
-4. Ejecutar las migraciones 
+4. Ejecutar las migraciones, donde en cada una se crean los campos que existirán en las respectivas 
+tablas de la base de datos.
 5. Instalacion de daisyui primero haciendo un update del composer para luego instalarlo con el
    comando **npm i -D daisyui@latest** y luego añadirlo al tailwind como plugin
 
@@ -55,6 +56,11 @@ Con los campos:
 - bcrypt(contraseña)
 Esto es creado por terminal ya que si se crea en la base de datos salta error ya que no está encriptada la
 contrseña con bycript.
+
+## Configuracion base de datos 
+Una vez las migraciones realizadas al principio se han de crear los modelos de las mismas para poder
+hacer las relacciones entre sí.
+Donde en cada funcion de cada modelo se pueden recoger una serie de datos para relacionarlos.
 
 
     
