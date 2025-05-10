@@ -22,20 +22,16 @@ class UpdateMaterialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:100|unique:materiales,nombre',
-            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'precio_m2' => 'required|numeric',
+            'nombre' => 'string|max:100',
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'precio_m2' => 'numeric',
         ];
     }
 
     public function messages(): array
     {
         return [
-            "nombre.required" => "Debe introducir un nombre",
-            "nombre.unique" => "Este material ya existe",
-            "foto.required" => "Debe adjuntar una imágen",
             "foto.mimes" => "La imágen debe ser en formato jpeg,jpg o png",
-            "precio_m2.required" => "Debe introducir un precio"
         ];
     }
 

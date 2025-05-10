@@ -22,7 +22,7 @@ class MaterialController extends Controller
 
         $totalMateriales = Material::count();
 
-            return view('materiales.index',compact('filas','campos', 'totalMateriales'));
+        return view('materiales.index',compact('filas','campos', 'totalMateriales'));
     }
 
     /**
@@ -70,7 +70,13 @@ class MaterialController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateMaterialRequest $request, Material $material){
-        $material->update($request->input());
+        $campos = $request->only('nombre', 'precio_m2');
+
+        if ($request->hasFile('foto')) {
+            $campos['foto'] = $request->file('foto')->store('fotos', 'public');
+        }
+
+        $material->update($campos);
         session()->flash("mensaje","El material $material->nombre ha sido actualizado.");
         return redirect()->route('materiales.index');
     }

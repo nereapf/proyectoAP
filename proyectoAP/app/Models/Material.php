@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Material extends Model
 {
+    protected $table = 'materiales';
     protected $fillable = ['nombre', 'foto', 'precio_m2'];
 
     public function productos(){
