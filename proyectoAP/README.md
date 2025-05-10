@@ -78,11 +78,6 @@ poder implementar los CRUD de cada uno.
    - Proyecto
    - Gasto
    - Catalogo
-
-
-(aqui me he quedadado)
-
-
 3. En cada carpeta se deben crear unos archivos para mostrar las tablas (index),
    crear los mismos (create), editar existentes (edit), dependiendo de las funciones de cada uno.
 - Create: Creación de un formulario que recoge los datos y llama al store del controlador
