@@ -1,4 +1,4 @@
-<header class="bg-white w-full">
+<header class="bg-white w-full pb-5">
     <a href="#" class="absolute top-4 left-4 bg-azulFondo hover:bg-blue-200 text-azulOscuro rounded-full p-2 shadow transition">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
              stroke="currentColor">
@@ -15,3 +15,4 @@
     </div>
     <div class="w-full border-b-4 border-azulOscuro"></div>
 </header>
+<x-layouts.nav />

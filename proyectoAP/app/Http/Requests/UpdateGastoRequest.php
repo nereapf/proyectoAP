@@ -22,7 +22,7 @@ class UpdateGastoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:100|unique:gastos,nombre',
+            'nombre' => 'required|string|max:100|unique:gastos_fabricacion,nombre',
             'precio_hora' => 'required|numeric',
         ];
     }

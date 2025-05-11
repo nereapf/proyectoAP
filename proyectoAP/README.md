@@ -91,35 +91,35 @@ poder implementar los CRUD de cada uno.
    *Edit*: Devuelve el formulario de manera que puedas editar el proyecto especificado.
    *Update*: Actualiza los datos del proyecto y guarda los nuevos datos en la base de datos.
    *Destroy*: Elimina el proyecto seleccionado de la base de datos.
-5. **CREAR UN NUEVO PROYECTO** - Para hacer esto, se crea tanto el archivo create, como la funcion
+5. **CREAR** - Para hacer esto, se crea tanto el archivo create, como la funcion
    create y store del controlador.
-   Para que la función *store* funcine también debemos configrar el archivo *StoreProyectoRequest.php* para
+   Para que la función *store* funcine también debemos configrar el archivo *StoreRequest.php* para
    introducir los campos a la hora de crear el proyecto. Además también se podrá tanto autorizar los permisos
    como añadir en el archivo una función para poder mostrar los mensajes de error cuando un campo sea erróneo
    a la hora de crearlo.
-6.  **EDITAR UN PROYECTO** - Para ello primero de todo creamos en el index (dentro de la tabla) un
-    botón para poder editar específicamente uno de los proyectos.
+6.  **EDITAR** - Para ello primero de todo creamos en el index (dentro de la tabla) un
+    botón para poder editar específicamente uno.
     Además, en el controler llamaremos a las funiones de edit y update para editar y actualizar la tabla, y
-    crearemos en la carpeta proyectos el *edit.blade.php*, donde se creará un formulario para poder cambiar
+    crearemos en la carpeta el *edit.blade.php*, donde se creará un formulario para poder cambiar
     los datos. Junto a esto para que la funcion update funcione, se debe configurar el archivo
-    *UpdateProyectoRequest.php* para que al igual que en el store, introduzca los datos, cree los mensajes de
+    *UpdateRequest.php* para que al igual que en el store, introduzca los datos, cree los mensajes de
     error para los campos que sean erróneos y autorice los permisos.
-- Junto a la actualización de un proyecto implementaremos una confirmación antes de realizar la acción con
+- Junto a la actualización, implementaremos una confirmación antes de realizar la acción con
   la librería de sewwtalert.
     - Instalaremos la librería (npm install sweetalert --save)
-    - Incluimos la libreria en app.js
+    - Incluimos la libreria en resources/js/app.js
     - Acceder a *edit.blade.php* para llamar a la funcion en el formulario y cuando haga click al boton de
       "Guardar" pida la confirmación.
-7. **ELIMINAR UN PROYECTO** - Para ello primero como al editar, creamos en el index (dentro de la tabla) un
-   botón para poder eliminar específicamente uno de los proyectos. Para borrarlo simplemente se crea un
-   formulario donde se ubica el boton para que cuando haga click confirme si se quiere borrar mediate una
+7. **ELIMINAR** - Para ello primero como al editar, creamos en el index (dentro de la tabla) un
+   botón para poder eliminar específicamente uno. Para borrarlo simplemente se crea un
+   formulario donde se ubica el boton para que cuando haga click confirme si se quiere borrar mediante una
    funcion de javascript y si esta se confirma se elimina de la base de datos y la tabla a través del id.
    Además, necesitaremos en el controler a la funcion destroy para poder eliminarlo.
-- Al igual que en la actualización, en la eliminación de un proyecto implementaremos una confirmación
+- Al igual que en la actualización, en la eliminación, implementaremos una confirmación
   antes de realizar la acción con la librería de sewwtalert.
-    - Como la librería ya esta intalada simplemente habría que crear el codigo de js para el alert de
-      confirmación e implementarlo en la tabla ubicada en el index.
-8. Añadir la ruta para que al pulsar el boton *proyectos* del nav te redirija a proyectos.index
+- Como la librería ya esta intalada simplemente habría que crear el codigo de js para el alert de
+  confirmación e implementarlo en la tabla ubicada en el index.
+8. Añadir la ruta para que al pulsar el boton correspondiente del nav te redirija a los index correspondientes
 - Implementar el href a los botones para redirigirlos (nav.blade.php)
 9. Junto a esto se implementarán también unos mensajes, que se mostrarán cuando se haya realizado una de
    las acciones, esto se realiza a través del controller almacenado los valores y el mensaje, y llamandole

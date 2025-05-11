@@ -1,6 +1,6 @@
 <x-layouts.layout>
     <x-layouts.header />
-    <div class="w-full bg-azulBordes py-4 px-8 flex justify-between items-center shadow my-8">
+    <div class="w-full bg-azulBordes py-4 px-8 flex justify-between items-center shadow">
         <h1 class="text-2xl font-bold text-blue-900 tracking-wide">GESTIÓN DE MATERIALES</h1>
         <a href="{{ route('materiales.create') }}"
            class="bg-blue-700 text-white px-6 py-2 rounded font-semibold hover:bg-blue-800 transition">
@@ -27,7 +27,6 @@
                         <h2 class="text-lg font-bold text-blue-900 mb-2 text-center">{{ $fila->nombre }}</h2>
                         <ul class="text-sm text-gray-700 mb-2 text-left w-full list-disc pl-4">
                             <li>Precio: <span class="font-semibold">{{ number_format($fila->precio_m2, 2) }} €/m²</span></li>
-                            {{-- Puedes añadir más detalles aquí si tuvieras más campos --}}
                         </ul>
                         <div class="flex gap-2 mt-2">
                             <a href="{{ route('materiales.edit', $fila->id) }}"

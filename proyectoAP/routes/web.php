@@ -17,7 +17,7 @@ Route::resource('productos', ProductoController::class)->middleware('auth');
 Route::resource('materiales', MaterialController::class)->parameters([
     'materiales' => 'material'
 ])->middleware('auth');
-Route::resource('gastos-fabricacion', GastosFabricacionController::class)->middleware('auth');
+Route::resource('gastos', GastosFabricacionController::class)->middleware('auth');
 Route::resource('proyectos', ProyectoController::class)->middleware('auth');
 Route::resource('catalogos', CatalogoController::class)->middleware('auth');
 Route::resource('valoraciones', ValoracionController::class)->parameters([

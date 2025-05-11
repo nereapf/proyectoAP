@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGastoRequest;
 use App\Http\Requests\UpdateGastoRequest;
-use App\Models\Gastos;
+use App\Models\GastosFabricacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -17,9 +17,9 @@ class GastosFabricacionController extends Controller
         $campos = Schema::getColumnListing('gastos_fabricacion');
         $exclude =["created_at","updated_at"];
         $campos = array_diff($campos,$exclude);
-        $filas = Gastos::select($campos)->get();
+        $filas = GastosFabricacion::select($campos)->get();
 
-        $totalGastos = Gastos::count();
+        $totalGastos = GastosFabricacion::count();
 
         return view('gastos.index',compact('filas','campos', 'totalGastos'));
     }
@@ -37,7 +37,7 @@ class GastosFabricacionController extends Controller
     public function store(StoreGastoRequest $request)
     {
         $datos = $request->only("nombre","precio_hora");
-        $gasto = new Gastos($datos);
+        $gasto = new GastosFabricacion($datos);
         $gasto->save();
 
         session()->flash("mensaje","$gasto->nombre ha sido añadido a la lista de gastos.");
@@ -47,21 +47,21 @@ class GastosFabricacionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Gastos $gasto){
+    public function show(GastosFabricacion $gasto){
         return view('gastos.show',compact('gasto'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Gastos $gasto){
+    public function edit(GastosFabricacion $gasto){
         return view('gastos.edit',compact('gasto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGastoRequest $request, Gastos $gasto){
+    public function update(UpdateGastoRequest $request, GastosFabricacion $gasto){
         $gasto->update($request->input());
         session()->flash("mensaje","El gasto $gasto->nombre ha sido actualizado.");
         return redirect()->route('gastos.index');
@@ -70,7 +70,7 @@ class GastosFabricacionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Gastos $gasto){
+    public function destroy(GastosFabricacion $gasto){
         $gasto->delete();
         session()->flash("mensaje","El gasto $gasto->nombre ha sido eliminado.");
         return redirect()->route('gastos.index');

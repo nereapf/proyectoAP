@@ -21,31 +21,32 @@
             <form action="{{ route('materiales.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 <div>
-                    <label for="nombre" class="block text-gray-700">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}"
-                           class="mt-1 block w-full rounded border-gray-300 focus:border-blue-700 focus:ring-blue-700" required>
-                    @error('nombre')
-                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                    <x-input-label for="nombre" :value="'Nombre'"/>
+                    <x-text-input id="nombre" class="mt-1 block w-full rounded border-gray-300 focus:border-blue-700 focus:ring-blue-700"
+                                  type="text" name="nombre" value="{{old('nombre')}}"/>
+                    @error("nombre")
+                    <div class="text-sm text-red-600">{{$message}}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label for="precio_m2" class="block text-gray-700">Precio por m²</label>
-                    <input type="number" step="0.01" name="precio_m2" id="precio_m2" value="{{ old('precio_m2') }}"
-                           class="mt-1 block w-full rounded border-gray-300 focus:border-blue-700 focus:ring-blue-700" required>
-                    @error('precio_m2')
-                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                    <x-input-label for="precio_m2" :value="'Precio por m²'"/>
+                    <x-text-input id="precio_m2" class="mt-1 block w-full rounded border-gray-300 focus:border-blue-700 focus:ring-blue-700"
+                                  type="number" name="precio_m2" value="{{old('precio_m2')}}"/>
+                    @error("precio_m2")
+                    <div class="text-sm text-red-600">{{$message}}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label for="foto" class="block text-gray-700">Foto</label>
-                    <input type="file" name="foto" id="foto"
-                           class="mt-1 block w-full rounded border-gray-300 focus:border-blue-700 focus:ring-blue-700 text-xs" required>
-                    @error('foto')
-                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                    <x-input-label for="foto" :value="'Foto'"/>
+                    <x-text-input id="foto" class="mt-1 block w-full rounded border-gray-300 focus:border-blue-700 focus:ring-blue-700 text-xs"
+                                  type="file" name="foto"/>
+                    @error("foto")
+                    <div class="text-sm text-red-600">{{$message}}</div>
                     @enderror
                 </div>
+
                 <div class="flex space-x-2">
                     <button type="submit"
                             class="w-full bg-black text-white font-semibold py-2 mt-8 rounded transition hover:bg-azulBoton">
