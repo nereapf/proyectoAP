@@ -26,7 +26,7 @@
                         @endif
                         <h2 class="text-lg font-bold text-blue-900 mb-2 text-center">{{ $fila->nombre }}</h2>
                         <ul class="text-sm text-gray-700 mb-2 text-left w-full list-disc pl-4">
-                            <li>Precio: <span class="font-semibold">{{ number_format($fila->precio_m2, 2) }} €/m²</span></li>
+                            <li>Precio: <span class="font-semibold">{{ ($fila->precio_m2) }} €/m²</span></li>
                         </ul>
                         <div class="flex gap-2 mt-2">
                             <a href="{{ route('materiales.edit', $fila->id) }}"

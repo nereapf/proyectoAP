@@ -14,6 +14,8 @@ Route::get('/', function () {
 })->name('index');
 
 Route::resource('productos', ProductoController::class)->middleware('auth');
+Route::post('/productos/{producto}/valoraciones', [ValoracionController::class, 'store'
+])->name('valoraciones.store');
 Route::resource('materiales', MaterialController::class)->parameters([
     'materiales' => 'material'
 ])->middleware('auth');

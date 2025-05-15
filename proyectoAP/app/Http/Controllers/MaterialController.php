@@ -36,16 +36,18 @@ class MaterialController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreMaterialRequest $request){
-        $rutaFoto = null;
-        if ($request->hasFile('foto')) {
-            $rutaFoto = $request->file('foto')->store('fotos', 'public');
-        }
+        $ruta = null;
 
         $material = Material::create([
             'nombre' => $request->nombre,
             'precio_m2' => $request->precio_m2,
-            'foto' => $rutaFoto
+            'foto' => $ruta
         ]);
+
+        if ($request->hasFile('foto')) {
+            $ruta = $request->file('foto')->store('materiales', 'public');
+            $material->foto = $ruta;
+        }
 
         $material->save();
         session()->flash("mensaje","$material->nombre ha sido añadido a la lista de materiales.");

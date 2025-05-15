@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
+use App\Models\GastosFabricacion;
+use App\Models\Material;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -28,7 +30,10 @@ class ProductoController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(){
-        return view("productos.create");
+        $materiales = Material::all();
+        $gastos = GastosFabricacion::all();
+
+        return view('productos.create', compact('materiales', 'gastos'));
     }
 
     /**

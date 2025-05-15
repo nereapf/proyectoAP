@@ -20,19 +20,19 @@ class ValoracionController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(){
-        return view("valoraciones.create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreValoracionRequest $request){
+    public function store(StoreValoracionRequest $request, $productoId){
         $datos = $request->only("puntuacion");
+        $datos['producto_id'] = $productoId;
         $valoracion = new Valoracion($datos);
         $valoracion->save();
 
         session()->flash("mensaje","Valoración realizada.");
-        return redirect()->route('valoraciones.index');
+        return redirect()->route('producto.show', $productoId);
     }
 
     /**
@@ -40,7 +40,6 @@ class ValoracionController extends Controller
      */
     public function show(Valoracion $valoracion){
 
-        return view('valoraciones.show',compact('valoracion'));
     }
 
     /**

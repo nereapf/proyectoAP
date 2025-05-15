@@ -56,6 +56,15 @@ Con los campos:
 - bcrypt(contraseña)
 Esto es creado por terminal ya que si se crea en la base de datos salta error ya que no está encriptada la
 contrseña con bycript.
+## Pestaña y favicon
+Esto, sirve para el efecto visual ante el usario que accede a la web.
+FAVICON: Para esto, en la carpeta *public* con el nombre *favicon.ico* se añade el icono y luego en
+el layout se añade en la etiqueta head de la siguiente forma:
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+NOMBRE DE LAS PESTAÑAS: Simplemente añadiendo la etiqueta *title* en el header de los blade de las 
+difernetes páginas para que cada una se llame de difernete manera, aunque en este caso se ha añadido
+el titulo *Accesorios Pellés* al layout para que a la hora de crear una nueva página si no se le pone un título
+y utiliza esa "plantilla" tenga un nombre general.
 
 ## Configuracion CRUD
 ### Base de datos 
