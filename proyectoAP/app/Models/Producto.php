@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    protected $fillable = ['nombre', 'foto', 'medidas', 'color', 'precio', 'catalogo_id'];
+    protected $fillable = ['nombre', 'foto', 'medidas', 'color', 'precio', 'incremento', 'catalogo_id'];
 
     public function catalogo(){
         return $this->belongsTo(Catalogo::class);
@@ -19,7 +19,8 @@ class Producto extends Model
     }
 
     public function gastos(){
-        return $this->belongsToMany(GastoFabricacion::class, 'gasto_producto')
+        return $this->belongsToMany(GastosFabricacion::class, 'gasto_producto','producto_id', 'gasto_id')
+            ->withPivot('horas')
             ->withTimestamps();
     }
 

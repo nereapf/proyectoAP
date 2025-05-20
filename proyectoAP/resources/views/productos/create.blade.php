@@ -58,15 +58,16 @@
 
                 <fieldset id="contenedorMateriales">
                     <legend class="block text-sm font-semibold mb-1 text-gray-700">Materiales</legend>
-                    <div class="flex items-center gap-4 mb-2">
-                        <select name="materiales[0]" class="border rounded px-2 py-1 flex-1" required>
+                    <div class="flex items-center gap-2 mb-2">
+                        <select name="materiales[0][material_id]" class="border rounded px-1 py-1 flex-1" required>
                             <option value="">Seleccionar material...</option>
                             @foreach($materiales as $material)
                                 <option value="{{ $material->id }}">{{ $material->nombre }}</option>
                             @endforeach
                         </select>
+                        <input type="number" name="materiales[0][metros]" min="0" step="any" placeholder="m²" class="border rounded px-1 py-1 w-12" required>
                         <div>
-                            <input type="checkbox" name="materiales[0]" value="1" class="ml-2">
+                            <input type="checkbox" name="materiales[0][principal]" value="1">
                             <span class="text-xs">¿Principal?</span>
                         </div>
                     </div>
@@ -101,7 +102,7 @@
                             class="w-full bg-black text-white font-semibold py-2 mt-8 rounded transition hover:bg-azulBoton">
                         Confirmar
                     </button>
-                    <a href="{{route('materiales.index')}}" class="px-3 bg-black text-white font-semibold py-2 mt-8 rounded transition hover:bg-red-800">
+                    <a href="{{route('productos.index')}}" class="px-3 bg-black text-white font-semibold py-2 mt-8 rounded transition hover:bg-red-800">
                         Cancelar
                     </a>
                 </div>
@@ -109,5 +110,98 @@
         </div>
     </div>
 </div>
+<script>
+    const materiales = @json($materiales);
+    let numMaterial = 1;
+    function otroMaterial() {
+        let contenedor = document.getElementById('contenedorMateriales');
+        let div = document.createElement('div');
+        div.className = "flex items-center gap-2 mb-2";
+
+        let select = document.createElement('select');
+        select.name = `materiales[${numMaterial}][material_id]`;
+        select.className = "border rounded px-1 py-1 flex-1";
+        select.required = true;
+
+        let seleccionar = document.createElement('option');
+        seleccionar.value = "";
+        seleccionar.text = "Seleccionar material...";
+        select.appendChild(seleccionar);
+
+        materiales.forEach(material => {
+            let option = document.createElement('option');
+            option.value = material.id;
+            option.text = material.nombre;
+            select.appendChild(option);
+        });
+
+        let inputMetros = document.createElement('input');
+        inputMetros.type = "number";
+        inputMetros.name = `materiales[${numMaterial}][metros]`;
+        inputMetros.min = "0";
+        inputMetros.step = "any";
+        inputMetros.placeholder = "m²";
+        inputMetros.className = "border rounded px-1 py-1 w-12";
+        inputMetros.required = true;
+
+        let div2 = document.createElement('div');
+        let checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.name = `materiales[${numMaterial}][principal]`;
+        checkbox.value = "1";
+        div2.appendChild(checkbox);
+        let span = document.createElement('span');
+        span.className = "text-xs";
+        span.innerText = "¿Principal?";
+        div2.appendChild(span);
+
+        div.appendChild(select);
+        div.appendChild(inputMetros);
+        div.appendChild(div2);
+
+        contenedor.appendChild(div);
+        numMaterial++;
+    }
+
+    const gastos = @json($gastos);
+    let gastoIndex = 1;
+    function otroGasto() {
+        const contenedor = document.getElementById('contenedorGastos');
+        const div = document.createElement('div');
+        div.className = "flex items-center gap-1 mb-2";
+
+        const select = document.createElement('select');
+        select.name = `gastos[${gastoIndex}][gasto_id]`;
+        select.className = "border rounded px-2 py-1 flex-1";
+        select.required = true;
+
+        const seleccionar = document.createElement('option');
+        seleccionar.value = "";
+        seleccionar.text = "Seleccionar gasto...";
+        select.appendChild(seleccionar);
+
+        gastos.forEach(gasto => {
+            const option = document.createElement('option');
+            option.value = gasto.id;
+            option.text = gasto.nombre;
+            select.appendChild(option);
+        });
+
+        const inputHoras = document.createElement('input');
+        inputHoras.type = "number";
+        inputHoras.name = `gastos[${gastoIndex}][horas]`;
+        inputHoras.min = "0";
+        inputHoras.step = "any";
+        inputHoras.placeholder = "Horas/Cantidad";
+        inputHoras.className = "border rounded px-2 py-1 w-28";
+        inputHoras.required = true;
+
+        div.appendChild(select);
+        div.appendChild(inputHoras);
+
+        contenedor.appendChild(div);
+        gastoIndex++;
+    }
+</script>
 </body>
 </html>

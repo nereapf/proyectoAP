@@ -22,7 +22,7 @@ class StoreMaterialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:100|unique:materiales,nombre',
+            'nombre' => 'required|string|max:100|unique:productos,nombre',
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'precio_m2' => 'required|numeric',
         ];
@@ -36,8 +36,8 @@ class StoreMaterialRequest extends FormRequest
             "foto.required" => "Debe adjuntar una imágen",
             "foto.mimes" => "La imágen debe ser en formato jpeg,jpg o png",
             'foto.max' => 'La imagen no debe superar los 2MB',
-            'precio_m2.required' => 'Debe introducir un precio',
-            'precio_m2.numeric' => 'El precio debe ser un número',
+            "precio_m2.required" => "Debe introducir un precio"
         ];
     }
 }
+

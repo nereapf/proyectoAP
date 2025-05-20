@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
+use App\Models\Catalogo;
 use App\Models\GastosFabricacion;
 use App\Models\Material;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
 
 class ProductoController extends Controller
@@ -44,14 +46,48 @@ class ProductoController extends Controller
         if ($request->hasFile('foto')) {
             $rutaFoto = $request->file('foto')->store('fotos', 'public');
         }
+
+        $catalogo = Catalogo::first();
+
+        $costoTotal = 0;
+        foreach ($request->materiales as $material) {
+            $mat = Material::find($material['material_id']);
+            $metros = floatval($material['metros'] ?? 0);
+
+            $costoTotal += $mat->precio_m2 * $metros;
+        }
+        if (!empty($request->gastos)) {
+            foreach ($request->gastos as $gasto) {
+                $gastoModel = GastosFabricacion::find($gasto['gasto_id']);
+                $horas = floatval($gasto['horas'] ?? 0);
+                $costoTotal += $gastoModel->precio_hora * $horas;
+            }
+        }
+
+        $incremento = floatval($request->incremento ?? 0);
+        $precioTotal = $costoTotal * (1 + ($incremento / 100));
+
         $producto = Producto::create([
             'nombre' => $request->nombre,
             'foto' => $rutaFoto,
             'medidas' => $request->medidas,
             'color' => $request->color,
-            'precio' => $request->precio,
-            'catalogo_id' => $request->catalogo_id
+            'precio' => $precioTotal,
+            'incremento' => $request->incremento,
+            'catalogo_id' => $catalogo->id
         ]);
+
+        foreach ($request->materiales as $material) {
+            $producto->materiales()->attach($material['material_id'], [
+                'm2' => $material['metros'],
+                'principal' => $material['principal'] ?? false
+            ]);
+        }
+        foreach ($request->gastos as $gasto) {
+            $producto->gastos()->attach($gasto['gasto_id'], [
+                'horas' => $gasto['horas']
+            ]);
+        }
 
         $producto->save();
         session()->flash("mensaje","$producto->nombre ha sido añadido a la lista de productos.");
@@ -69,7 +105,10 @@ class ProductoController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Producto $producto){
-        return view('productos.edit',compact('producto'));
+        $producto->load('materiales', 'gastos');
+        $materiales = Material::all();
+        $gastos = GastosFabricacion::all();
+        return view('productos.edit',compact('producto', 'materiales', 'gastos'));
     }
 
     /**
@@ -89,4 +128,5 @@ class ProductoController extends Controller
         session()->flash("mensaje","El producto $producto->nombre ha sido eliminado.");
         return redirect()->route('productos.index');
     }
+
 }

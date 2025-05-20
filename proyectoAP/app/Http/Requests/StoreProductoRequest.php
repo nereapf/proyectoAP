@@ -26,8 +26,11 @@ class StoreProductoRequest extends FormRequest
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'medidas' => 'required|string|max:255',
             'color' => 'required|string|max:100',
-            'precio' => 'required|numeric',
+            'incremento' => 'required|numeric|min:0',
             'catalogo_id' => 'exists:catalogos,id',
+            'materiales.*.material_id' => 'required|exists:materiales,id',
+            'gastos.*.gasto_id' => 'required|exists:gastos_fabricacion,id',
+            'gastos.*.horas' => 'required|numeric|min:0'
         ];
     }
 
@@ -41,8 +44,6 @@ class StoreProductoRequest extends FormRequest
             'foto.max' => 'La imagen no debe superar los 2MB',
             'medidas.required' => "Debe introducir un medida para el producto",
             'color.required' => "Debe introducir un color",
-            'precio.required' => 'Debe introducir un precio',
-            'precio.numeric' => 'El precio debe ser un número',
         ];
     }
 }

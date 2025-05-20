@@ -17,7 +17,7 @@
             @endif
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-                @forelse($filas as $fila)
+                @foreach($filas as $fila)
                     <div class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center">
                         @if($fila->foto)
                             <img src="{{ asset('storage/' . $fila->foto) }}" alt="Foto" class="w-24 h-24 rounded border object-cover mb-3">
@@ -44,11 +44,7 @@
                             </form>
                         </div>
                     </div>
-                @empty
-                    <div class="col-span-5 text-center text-gray-500 py-16">
-                        No hay materiales registrados.
-                    </div>
-                @endforelse
+                @endforeach
             </div>
         </div>
     </div>
