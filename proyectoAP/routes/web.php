@@ -16,12 +16,20 @@ Route::get('/', function () {
 Route::resource('productos', ProductoController::class)->middleware('auth');
 Route::post('/productos/{producto}/valoraciones', [ValoracionController::class, 'store'
 ])->name('valoraciones.store');
+
 Route::resource('materiales', MaterialController::class)->parameters([
     'materiales' => 'material'
 ])->middleware('auth');
+
 Route::resource('gastos', GastosFabricacionController::class)->middleware('auth');
+
 Route::resource('proyectos', ProyectoController::class)->middleware('auth');
+
 Route::resource('catalogos', CatalogoController::class)->middleware('auth');
+Route::post('/catalogo/add', [CatalogoController::class, 'addProducto'])->name('catalogo.add');
+Route::post('/catalogo/remove', [CatalogoController::class, 'removeProducto'])->name('catalogo.remove');
+
+
 Route::resource('valoraciones', ValoracionController::class)->parameters([
     'valoraciones' => 'valoracion'
 ]);

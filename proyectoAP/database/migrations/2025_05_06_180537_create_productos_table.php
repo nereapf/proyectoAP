@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('color');
             $table->decimal('precio', 10, 2)->nullable();
             $table->integer('incremento')->nullable();
-            $table->foreignId('catalogo_id')->constrained('catalogos')->onDelete('cascade');
+            $table->foreignId('catalogo_id')->nullable()->constrained('catalogos')->onDelete('cascade');
             $table->timestamps();
         });
     }

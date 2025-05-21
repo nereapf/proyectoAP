@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCatalogoRequest;
 use App\Models\Catalogo;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -13,15 +14,21 @@ class CatalogoController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        $campos = Schema::getColumnListing('catalogos');
-        $exclude =["created_at","updated_at"];
-        $campos = array_diff($campos,$exclude);
-        $filas = Catalogo::select($campos)->get();
+        $catalogo = Catalogo::where('nombre', 'principal')->first();
+        $productosCatalogo = $catalogo ? $catalogo->productos : collect();
 
-        $totalCatalogos = Catalogo::count();
+        $productosDisponibles = Producto::where(function ($query) use ($catalogo) {
+            if ($catalogo) {
+                $query->whereNull('catalogo_id')
+                    ->orWhere('catalogo_id', '!=', $catalogo->id);
+            } else {
+                $query->whereNull('catalogo_id');
+            }
+        })->get();
 
-        return view('catalogos.index',compact('filas','campos', 'totalCatalogos'));
+        return view('catalogos.index', compact('catalogo', 'productosCatalogo', 'productosDisponibles'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -72,4 +79,28 @@ class CatalogoController extends Controller
     {
         //
     }
+
+    public function addProducto(Request $request)
+    {
+        $catalogo = Catalogo::where('nombre', 'principal')->first();
+        if ($catalogo) {
+            $producto = Producto::find($request->producto_id);
+            if ($producto) {
+                $producto->catalogo_id = $catalogo->id;
+                $producto->save();
+            }
+        }
+        return redirect()->route('catalogos.index');
+    }
+
+    public function removeProducto(Request $request)
+    {
+        $producto = Producto::find($request->producto_id);
+        if ($producto) {
+            $producto->catalogo_id = null;
+            $producto->save();
+        }
+        return redirect()->route('catalogos.index');
+    }
+
 }

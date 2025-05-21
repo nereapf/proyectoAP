@@ -47,8 +47,6 @@ class ProductoController extends Controller
             $rutaFoto = $request->file('foto')->store('fotos', 'public');
         }
 
-        $catalogo = Catalogo::first();
-
         $costoTotal = 0;
         foreach ($request->materiales as $material) {
             $mat = Material::find($material['material_id']);
@@ -74,7 +72,7 @@ class ProductoController extends Controller
             'color' => $request->color,
             'precio' => $precioTotal,
             'incremento' => $request->incremento,
-            'catalogo_id' => $catalogo->id
+            'catalogo_id' => null
         ]);
 
         foreach ($request->materiales as $material) {
