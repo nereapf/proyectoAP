@@ -24,9 +24,6 @@ class StoreProyectoRequest extends FormRequest
         return [
             'nombre' => 'required|string|max:100',
             'empresa' => 'required|string|max:100',
-            'precio' => 'required|numeric',
-            'fotos_productos' => 'required|array',
-            'fotos_productos.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 
@@ -35,10 +32,6 @@ class StoreProyectoRequest extends FormRequest
         return [
             "nombre.required" => "Debe introducir un nombre para el proyecto",
             "empresa.required" => "Debe introducir la empresa a la que va dirigida este proyecto",
-            "precio.required" => "Debe introducir un precio",
-            "fotos_productos.required" => "Debe seleccionar al menos un producto",
-            "fotos_productos.*.image" => "El archivo debe ser una imagen",
-            "fotos_productos.*.mimes" => "La imágen debe ser en formato jpeg,jpg o png",
         ];
     }
 

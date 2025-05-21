@@ -29,7 +29,8 @@ class ProyectoController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(){
-        return view("proyectos.create");
+        $productos = Producto::all();
+        return view("proyectos.create", compact('productos'));
     }
 
     /**
@@ -47,9 +48,12 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::create([
             'nombre' => $request->nombre,
             'empresa' => $request->empresa,
-            'precio' => $request->precio,
             'fotos_productos' => json_encode($fotos)
         ]);
+
+        if ($request->has('productos')) {
+            $proyecto->productos()->attach($request->productos);
+        }
 
         $proyecto->save();
         session()->flash("mensaje","$proyecto->nombre ha sido añadido a la lista de proyectos.");
@@ -67,7 +71,9 @@ class ProyectoController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Proyecto $proyecto){
-        return view('proyectos.edit',compact('proyecto'));
+        $proyecto->load('productos');
+        $productos= Producto::all();
+        return view('proyectos.edit',compact('proyecto', 'productos'));
     }
 
     /**
@@ -75,6 +81,7 @@ class ProyectoController extends Controller
      */
     public function update(UpdateProyectoRequest $request, Proyecto $proyecto){
         $proyecto->update($request->input());
+        $proyecto->productos()->sync($request->productos);
         session()->flash("mensaje","El proyecto $proyecto->nombre ha sido actualizado.");
         return redirect()->route('proyectos.index');
     }

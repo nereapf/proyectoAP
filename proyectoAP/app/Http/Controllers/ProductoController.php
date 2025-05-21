@@ -116,6 +116,8 @@ class ProductoController extends Controller
      */
     public function update(UpdateProductoRequest $request, Producto $producto){
         $producto->update($request->input());
+        $producto->materiales()->sync($request->materiales);
+        $producto->gastos()->sync($request->gastos);
         session()->flash("mensaje","El producto $producto->nombre ha sido actualizado.");
         return redirect()->route('productos.index');
     }

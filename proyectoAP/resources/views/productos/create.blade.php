@@ -30,7 +30,7 @@
                 </div>
 
                 <div>
-                    <x-input-label for="medidas" :value="'Medidas'"/>
+                    <x-input-label for="medidas" :value="'Medidas (cm)'"/>
                     <x-text-input id="medidas" class="mt-1 block w-full rounded border-gray-300 focus:border-blue-700 focus:ring-blue-700"
                                   type="text" name="medidas" value="{{old('medidas')}}"/>
                     @error("medidas")

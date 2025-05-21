@@ -36,7 +36,7 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li><strong>Medidas y color:</strong> {{ $fila->medidas }} - {{ $fila->color }}</li>
+                                <li><strong>Medidas en cm y color:</strong> {{ $fila->medidas }} - {{ $fila->color }}</li>
                                 <li><strong>Costos/Gastos:</strong>
                                     <ul class="list-disc list-inside ml-4">
                                         @foreach($fila->gastos as $gasto)
@@ -69,7 +69,7 @@
     <script>
         function confirmDelete(id) {
             swal({
-                title: "¿Deseas eliminar este material?",
+                title: "¿Deseas eliminar este producto?",
                 text: "Esta acción no se podrá deshacer",
                 icon: "warning",
                 buttons: true

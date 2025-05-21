@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Proyecto extends Model
 {
-    protected $fillable = ['nombre', 'empresa', 'precio', 'fotos_productos'];
+    protected $fillable = ['nombre', 'empresa'];
 
     protected $casts = ['fotos_productos' => 'array'];
 

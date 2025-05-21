@@ -31,7 +31,7 @@
                 </div>
 
                 <div>
-                    <x-input-label for="medidas" :value="'Medidas'"/>
+                    <x-input-label for="medidas" :value="'Medidas (cm)'"/>
                     <x-text-input id="medidas" class="mt-1 block w-full rounded border-gray-300 focus:border-blue-700 focus:ring-blue-700"
                                   type="text" name="medidas" value="{{$producto->medidas}}"/>
                     @error("medidas")
@@ -131,7 +131,7 @@
 <script>
     function confirmUpdate(id) {
         swal({
-            title: "¿Deseas actualizar este material?",
+            title: "¿Deseas actualizar este producto?",
             text: "Esta acción no se podrá deshacer",
             icon: "warning",
             buttons: true
