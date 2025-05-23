@@ -28,6 +28,7 @@ Route::resource('proyectos', ProyectoController::class)->middleware('auth');
 Route::resource('catalogos', CatalogoController::class)->middleware('auth');
 Route::post('/catalogo/add', [CatalogoController::class, 'addProducto'])->name('catalogo.add');
 Route::post('/catalogo/remove', [CatalogoController::class, 'removeProducto'])->name('catalogo.remove');
+Route::get('/catalogo-publico', [CatalogoController::class, 'catalogoPublico'])->name('catalogo.publico');
 
 
 Route::resource('valoraciones', ValoracionController::class)->parameters([

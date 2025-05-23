@@ -64,7 +64,7 @@
 
             <!-- Botón catálogo -->
             <div class="flex justify-center mt-8">
-                <a href=""
+                <a href="{{ route('catalogo.publico') }}"
                    class="bg-blue-700 text-white font-semibold px-8 py-3 rounded hover:bg-blue-800 transition">
                     Acceder al catálogo
                 </a>

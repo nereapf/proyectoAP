@@ -50,11 +50,6 @@
                     </div>
                     <div class="p-4">
                         <h3 class="font-bold">{{ $producto->nombre }}</h3>
-                        <div class="flex items-center">
-                            <div class="flex">
-                                <p>"estrellas"</p>
-                            </div>
-                        </div>
                         <p class="font-bold mt-2">{{$producto->precio, 2}}€</p>
 
                         <form action="{{ route('catalogo.remove') }}" method="POST" class="mt-3">

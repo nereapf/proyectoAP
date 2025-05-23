@@ -56,6 +56,11 @@ Con los campos:
 - bcrypt(contraseña)
 Esto es creado por terminal ya que si se crea en la base de datos salta error ya que no está encriptada la
 contrseña con bycript.
+
+Además de esto, al acceder con el inicio de sesión, queremos que la vista sea difernte y editable por lo que
+para cambiar la ruta donde se redirigirá una vez se haya logeado el usuario se hace desde 
+*AuthenticatedSessionController.php* en el store.
+
 ## Pestaña y favicon
 Esto, sirve para el efecto visual ante el usario que accede a la web.
 FAVICON: Para esto, en la carpeta *public* con el nombre *favicon.ico* se añade el icono y luego en
@@ -133,9 +138,4 @@ poder implementar los CRUD de cada uno.
 9. Junto a esto se implementarán también unos mensajes, que se mostrarán cuando se haya realizado una de
    las acciones, esto se realiza a través del controller almacenado los valores y el mensaje, y llamandole
    desde el index para mostrarlo además de aplicarle una transición de desaparición con js.
-    
 
-
-
-
-AÑADIR JSON EN TABLA PROYECTOS PARA VER TODAS LAS FOTOS DE TODOS LOS PRODUCTOS

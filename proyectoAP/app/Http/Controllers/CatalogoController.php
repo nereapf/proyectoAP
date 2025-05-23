@@ -80,8 +80,7 @@ class CatalogoController extends Controller
         //
     }
 
-    public function addProducto(Request $request)
-    {
+    public function addProducto(Request $request){
         $catalogo = Catalogo::where('nombre', 'principal')->first();
         if ($catalogo) {
             $producto = Producto::find($request->producto_id);
@@ -93,8 +92,7 @@ class CatalogoController extends Controller
         return redirect()->route('catalogos.index');
     }
 
-    public function removeProducto(Request $request)
-    {
+    public function removeProducto(Request $request){
         $producto = Producto::find($request->producto_id);
         if ($producto) {
             $producto->catalogo_id = null;
@@ -102,5 +100,13 @@ class CatalogoController extends Controller
         }
         return redirect()->route('catalogos.index');
     }
+
+    public function catalogoPublico(){
+        $catalogo = Catalogo::where('nombre', 'principal')->first();
+        $productosCatalogo = $catalogo ? $catalogo->productos : collect();
+
+        return view('catalogos.publico', compact('catalogo', 'productosCatalogo'));
+    }
+
 
 }
