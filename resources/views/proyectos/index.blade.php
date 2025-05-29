@@ -91,6 +91,10 @@
                                     Eliminar
                                 </button>
                             </form>
+                            <a href="{{ route('proyectos.exportarPdf', $fila) }}"
+                               class="bg-purple-300 text-purple-600 font-semibold px-4 py-2 rounded hover:bg-purple-600 hover:text-purple-200 transition">
+                                Exportar a PDF
+                            </a>
                         </div>
                     </div>
                 @endforeach

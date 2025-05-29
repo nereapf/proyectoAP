@@ -8,6 +8,7 @@ use App\Models\Producto;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProyectoController extends Controller
 {
@@ -94,5 +95,12 @@ class ProyectoController extends Controller
         $proyecto->delete();
         session()->flash("mensaje","El proyecto $proyecto->nombre ha sido eliminado.");
         return redirect()->route('proyectos.index');
+    }
+
+    public function exportarPdf(Proyecto $proyecto){
+        $proyecto->load('productos.materiales', 'productos.gastos');
+        $pdf = Pdf::loadView('proyectos.pdf', compact('proyecto'));
+
+        return $pdf->download($proyecto->nombre.'_'.$proyecto->empresa.'.pdf');
     }
 }

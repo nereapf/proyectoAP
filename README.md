@@ -210,3 +210,10 @@ la comparación.
 5. Finalmente es implementarlo en el blade de productos como un formulario con un botón que nos lleve al blade
 donde se visualizan los resultados, recogiendo en un blade la vista con la imagen, enlace, titulo y descripción
 de todos los productos que se encuentren con ese nombre en la store de google.
+
+### Exportación a pdf
+Para esto se necesita instalar la librería de Laravel DomPDF.
+Comenzando la configuración con la ruta en web.php de la función del controlador donde se van a cargar todos los
+datos, a guardar en un pdf (personalizable con un blade) y descargarlo con el nombre del proyecto y la emoresa a la que va dirigido.
+Junto a esto se crea el blade del pdf que va a ser descargado, y añadiendo el botón de exportar a pdf en cada
+proyecto llamando a la función para poder exportarlo.

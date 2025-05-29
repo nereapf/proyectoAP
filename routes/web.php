@@ -25,6 +25,9 @@ Route::resource('materiales', MaterialController::class)->parameters([
 Route::resource('gastos', GastosFabricacionController::class)->middleware('auth');
 
 Route::resource('proyectos', ProyectoController::class)->middleware('auth');
+Route::get('/proyectos/{proyecto}/exportar-pdf', [ProyectoController::class, 'exportarPdf'])
+    ->name('proyectos.exportarPdf');
+
 
 Route::resource('catalogos', CatalogoController::class)->middleware('auth');
 Route::post('/catalogo/add', [CatalogoController::class, 'addProducto'])->name('catalogo.add');
