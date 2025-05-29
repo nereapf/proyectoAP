@@ -22,7 +22,7 @@ class StoreProyectoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:100',
+            'nombre' => 'required|string|max:100|unique:proyectos,nombre',
             'empresa' => 'required|string|max:100',
         ];
     }
@@ -31,6 +31,7 @@ class StoreProyectoRequest extends FormRequest
     {
         return [
             "nombre.required" => "Debe introducir un nombre para el proyecto",
+            "nombre.unique" => "Este proyecto ya existe",
             "empresa.required" => "Debe introducir la empresa a la que va dirigida este proyecto",
         ];
     }

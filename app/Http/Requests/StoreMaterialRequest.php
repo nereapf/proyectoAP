@@ -22,7 +22,7 @@ class StoreMaterialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:100|unique:productos,nombre',
+            'nombre' => 'required|string|max:100|unique:materiales,nombre',
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'precio_m2' => 'required|numeric|min:0',
         ];

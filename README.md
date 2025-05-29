@@ -199,7 +199,7 @@ texto introducido en el input y ejecute una funcion para recoger todas las filas
 con el texto introducido cada vez que se escribe en el input, para mostrarlo con display o por el 
 contrario no mostrarlos.
 
-### API comparación de precios con mercado (Google Cloud)
+### API comparación de productos con mercado (Google Cloud)
 1. Primero se crea un proyecto en google cloud para poder generar una clave API. Esto se hace habilitando la api
 llamada *Custom Search API* y allí se crea en la seccion Credenciales una clave de API.
 2. Luego, en *programmablesearchengine.google.com/controlpanel/all* añadir un buscador para que busque en google 
@@ -217,3 +217,16 @@ Comenzando la configuración con la ruta en web.php de la función del controlad
 datos, a guardar en un pdf (personalizable con un blade) y descargarlo con el nombre del proyecto y la emoresa a la que va dirigido.
 Junto a esto se crea el blade del pdf que va a ser descargado, y añadiendo el botón de exportar a pdf en cada
 proyecto llamando a la función para poder exportarlo.
+
+### Actualización de datos en cascada
+NECESIDADES
+1. Si cambias el precio de un material:
+Todos los productos que usan ese material deben actualizar su precio.
+2. Si cambias el precio de un gasto:
+Todos los productos que usan ese gasto deben actualizar su precio.
+
+Para que esto ocurra, se crea un método para actualizar el precio en el modelo Producto que sumando
+los costos de materiales y gastos asociados y actualiza el precio para guardarlo en la base de datos.
+En el modelo Material y GastosFabricacion, se utiliza un evento Eloquent para que al actualizar el 
+precio recalcule el precio de todos los productos que contengan ese material o gasto llamando a la funcion
+previanente mencionada.

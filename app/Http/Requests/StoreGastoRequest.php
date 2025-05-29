@@ -31,7 +31,7 @@ class StoreGastoRequest extends FormRequest
     {
         return [
             "nombre.required" => "Debe introducir un nombre",
-            "nombre.unique" => "Este material ya existe",
+            "nombre.unique" => "Este gasto ya existe",
             "precio_hora.required" => "Debe introducir un precio",
             "precio_hora.min" => "No puede ser un número negativo"
         ];

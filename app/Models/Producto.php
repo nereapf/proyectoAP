@@ -33,6 +33,17 @@ class Producto extends Model
             ->withTimestamps();
     }
 
-    public function mediaValoraciones(){
+    public function actualizarPrecio(){
+        $costoTotal = 0;
+
+        foreach ($this->materiales as $material) {
+            $costoTotal += $material->precio_m2 * $material->pivot->m2;
+        }
+        foreach ($this->gastos as $gasto) {
+            $costoTotal += $gasto->precio_hora * $gasto->pivot->horas;
+        }
+        $this->precio = $costoTotal * (1 + ($this->incremento / 100));
+        $this->save();
     }
+
 }

@@ -38,7 +38,7 @@ class StoreProductoRequest extends FormRequest
     {
         return [
             "nombre.required" => "Debe introducir un nombre",
-            "nombre.unique" => "Este material ya existe",
+            "nombre.unique" => "Este producto ya existe",
             "foto.required" => "Debe adjuntar una imágen",
             "foto.mimes" => "La imágen debe ser en formato jpeg,jpg o png",
             'foto.max' => 'La imagen no debe superar los 2MB',

@@ -13,4 +13,14 @@ class GastosFabricacion extends Model
         return $this->belongsToMany(Producto::class, 'gasto_producto')
             ->withTimestamps();
     }
+
+    protected static function booted(){
+        static::updated(function ($gasto) {
+            if ($gasto->isDirty('precio_hora')) {
+                foreach ($gasto->productos as $producto) {
+                    $producto->actualizarPrecio();
+                }
+            }
+        });
+    }
 }

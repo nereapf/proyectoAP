@@ -14,4 +14,14 @@ class Material extends Model
             ->withPivot('m2', 'principal')
             ->withTimestamps();
     }
+
+    protected static function booted(){
+        static::updated(function ($material) {
+            if ($material->isDirty('precio_m2')) {
+                foreach ($material->productos as $producto) {
+                    $producto->actualizarPrecio();
+                }
+            }
+        });
+    }
 }
