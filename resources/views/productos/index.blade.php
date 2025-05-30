@@ -24,7 +24,7 @@
             @endif
 
             @foreach($filas as $fila)
-                <div class="producto bg-white border border-blue-100 rounded-2xl shadow-lg p-6 hover:shadow-2xl transition flex flex-col">
+                <div class="producto mx-auto bg-white border border-blue-100 rounded-2xl shadow-lg p-6 hover:shadow-2xl transition flex flex-col w-3/4">
                     <div class="flex flex-col md:flex-row gap-6">
                         <div class="w-full md:w-40 flex items-center justify-center rounded-xl overflow-hidden">
                             @if($fila->foto)

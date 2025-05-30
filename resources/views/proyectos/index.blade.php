@@ -31,7 +31,7 @@
                             <p class="text-gray-600">Cliente: {{ $fila->empresa }}</p>
                         </div>
 
-                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="flex flex-wrap gap-6 justify-center">
                             @foreach($fila->productos as $producto)
                                 <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
                                     @if($producto->foto)
